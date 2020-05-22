@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Login (Médico) - Ache seu médico{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Faça seu login médico</h5>
+                    <form class="form-signin" method="post">
+                        {% csrf_token %}
+                        <div class="form-label-group">
+                            <input type="TextInput" id="inputEmail" name="username" class="form-control" placeholder="Usuário"
+                                   required autofocus>
+                            <label for="inputEmail">Usuário</label>
+                        </div>
+
+                        <div class="form-label-group">
+                            <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Senha"
+                                   required>
+                            <label for="inputPassword">Senha</label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customCheck1">
+                            <label class="custom-control-label" for="customCheck1">Lembrar-me</label>
+                        </div>
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="margin-bottom:10px;">Entrar</button>
+                        <a href="cadastro_medico" style="text-decoration:none">
+                            <button type="button" class="btn btn-lg btn-secondary btn-block text-uppercase">Cadastre-se</button>
+                        </a>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
