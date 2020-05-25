@@ -4,47 +4,22 @@ from django.contrib.auth.decorators import login_required
 from .forms import *
 from .models import *
 from django.core.mail import send_mail
-from django.shortcuts import get_object_or_404
 
 # Create your views here.
+def home(request):
+    return render(request, 'index.html')
 
-def do_login(request):
+def do_login_medico(request):
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
         if user is not None:
             login(request, user)
-            return redirect('menu/{}'.format(user.id))
-    return render(request, 'index.html')
+            return redirect('pagina_medico/{}'.format(user.id))
+    return render(request, 'login_medico.html')
 
 def do_logout(request):
     logout(request)
-    return redirect('login')
-
-def do_login_medico(request):
-    if request.method == 'POST':
-        medico = authenticate(username=request.POST['username'], password=request.POST['password'])
-        if medico is not None:
-            login(request, medico)
-            return redirect('pagina_medico/{}'.format(medico.id))
-    return render(request, 'login_medico.html')
-
-def cadastro_user(request):
-    form = UsersForms(request.POST or None)
-    context = {'form': form}
-    if request.method == 'POST':
-        if form.is_valid():
-            '''
-            send_mail(
-                'Ache seu Médico - Cadastro Efetuado com Sucesso!',
-                'Olá ex!\nSeu cadastro no Ache seu Médico foi efetuado com sucesso. Obrigado por utilizar nosso site.\nEsperamos que você consiga encontrar o médico perfeito para o seu caso.\n\nSeu nome de usuário cadastrado é: ex\n\nEste é um email eletrônico. Não responda este email.',
-                'mensagem@acheseumedico.com.br',
-                ['matheusfarias009@hotmail.com'],
-                fail_silently=False,
-            )
-            '''
-            form.save()
-            return redirect('login')
-    return render(request, 'cadastro_user.html', context)
+    return redirect('login_medico')
 
 def cadastro_medico(request):
     formUser = UsersForms(request.POST or None)
@@ -60,13 +35,12 @@ def cadastro_medico(request):
     return render(request, 'cadastro_medico.html', context)
 
 @login_required
-def home(request, id):
-    return render(request, 'menu.html')
-
-@login_required
 def area_medico(request, id):
     context = {}
     medico = Medico.objects.get(id=id)
     context['medico'] = medico
+    if medico.foto != '':
+        foto = Medico.objects.filter(foto__exact=medico.foto)
+        context['foto'] = foto
     return render(request, 'area_medico.html', context)
 

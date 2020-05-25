@@ -8,7 +8,7 @@
             <div class="card card-signin my-5">
                 <div class="card-body">
                     <h5 class="card-title text-center">Cadastre-se médico</h5>
-                    <form class="form-signin" method="post">
+                    <form class="form-signin" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-label-group">
                             <input type="TextInput" id="inputFirstName" name="first_name" class="form-control" placeholder="Nome"
