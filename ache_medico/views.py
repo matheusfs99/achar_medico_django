@@ -48,14 +48,13 @@ def cadastro_user(request):
 
 def cadastro_medico(request):
     formUser = UsersForms(request.POST or None)
-    formMedico = MedicoForms(request.POST or None)
+    formMedico = MedicoForms(request.POST or None, request.FILES)
     context = {'formUser': formUser, 'formMedico': formMedico}
     if request.method == 'POST':
         if all((formUser.is_valid(), formMedico.is_valid())):
             user = formUser.save()
             medico = formMedico.save(commit=False)
             medico.user = user
-            medico.especialidade = get_object_or_404(Especialidade, id=id)
             medico.save()
             return redirect('login_medico')
     return render(request, 'cadastro_medico.html', context)
@@ -66,5 +65,8 @@ def home(request, id):
 
 @login_required
 def area_medico(request, id):
-    return render(request, 'area_medico.html')
+    context = {}
+    medico = Medico.objects.get(id=id)
+    context['medico'] = medico
+    return render(request, 'area_medico.html', context)
 

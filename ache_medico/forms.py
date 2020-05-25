@@ -27,10 +27,10 @@ class UsersForms(forms.ModelForm):
 class MedicoForms(forms.ModelForm):
     class Meta:
         model = Medico
-        fields = ['sexo', 'data_nascimento', 'telefone', 'especialidade']
+        fields = ['sexo', 'data_nascimento', 'telefone', 'especialidade', 'foto']
         widgets = {
-            'sexo': forms.Select(choices=Sexo.SEXO, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
+            'sexo': forms.Select(choices=Sexo.SEXO, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px', 'id': 'inputSexo'}),
             'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'maxlength': 9}),
             'telefone': forms.NumberInput(attrs={'class': 'form-control', 'maxlength': 11, 'placeholder': 'Telefone'}),
-            'especialidade': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Especialidade'}),
+            'especialidade': forms.Select(choices=Especialidade.ESPECIALIDADE, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
         }

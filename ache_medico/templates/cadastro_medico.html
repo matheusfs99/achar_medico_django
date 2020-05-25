@@ -29,6 +29,7 @@
                         </div>
 
                         <div class="form-label-group">
+                            <span>Sexo:</span>
                             {{formMedico.sexo}}
                         </div>
 
@@ -45,9 +46,8 @@
                         </div>
 
                         <div class="form-label-group">
-                            <input type="TextInput" id="inputEspecialidade" name="especialidade" class="form-control" placeholder="Especialidade"
-                                   required autofocus>
-                            <label for="inputEspecialidade">Especialidade</label>
+                            <span>Especialidade:</span>
+                            {{formMedico.especialidade}}
                         </div>
 
                         <div class="form-label-group">
@@ -61,7 +61,9 @@
                                    required>
                             <label for="inputPassword">Senha</label>
                         </div>
-
+                        <div class="form-label-group">
+                            {{formMedico.foto}}
+                        </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Cadastrar</button>
                         <hr class="my-4">
                         <div style="text-align: center;">
