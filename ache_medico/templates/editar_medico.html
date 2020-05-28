@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Perfil{% endblock title %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="card card-signin my-5">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Editar perfil</h5>
+                    <form class="form-signin" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-label-group">
+                            <span>Nome:</span>
+                            {{formUser.first_name}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Sobrenome:</span>
+                            {{formUser.last_name}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Email:</span>
+                            {{formUser.email}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Sexo:</span>
+                            {{formMedico.sexo}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Especialidade:</span>
+                            {{formMedico.data_nascimento}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Telefone:</span>
+                            {{formMedico.telefone}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Especialidade:</span>
+                            {{formMedico.especialidade}}
+                        </div>
+
+                        <div class="form-label-group">
+                            <span>Usuário:</span>
+                            {{formUser.username}}
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Salvar</button>
+                        <hr class="my-4">
+                        <div style="text-align: center;">
+                            <a href="{% url 'area_medico' user.id %}" style="text-decoration:none;">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
