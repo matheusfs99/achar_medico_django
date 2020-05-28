@@ -5,18 +5,131 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+    <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
         <div class="card card-signin my-5">
             <div class="card-body">
+                <div class="row">
+                    <a href="{% url 'logout' %}">
+                        <button type="button" class="btn btn-danger">Sair</button>
+                    </a>
+                    <a href="{% url 'edt_perfil' user.id %}" style="margin-left: 75%;">
+                        <button type="button" class="btn btn-info">Editar Perfil</button>
+                    </a>
+                </div>
                 {% if foto %}
-                    <img src="{{ medico.foto.url }}" alt="{{user.first_name}}_{{user.last_name}}" class="rounded mx-auto d-block" style="width:200px; height:200px;">
+                <img src="{{ medico.foto.url }}" alt="{{user.first_name}}_{{user.last_name}}"
+                     class="rounded mx-auto d-block" style="width:200px; height:200px;">
+                <div align="center">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-top:5px;"
+                            data-toggle="modal" data-target="#addFoto">Alterar Foto
+                    </button>
+                </div>
                 {% else %}
-                    <img src="..\..\media\medicos_imgs\sem-imagem-avatar.png" class="rounded mx-auto d-block" style="width:200px; height:200px;">
+                <img src="..\..\media\medicos_imgs\sem-imagem-avatar.png" class="rounded mx-auto d-block"
+                     style="width:200px; height:200px;">
+                <div align="center">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-top:5px;"
+                            data-toggle="modal" data-target="#addFoto">Adicionar Foto
+                    </button>
+                </div>
                 {% endif %}
                 <h1 style="text-align: center;">{{user.first_name}} {{user.last_name}}</h1>
+
+                <h4 align="center">Classificação: {{medico.classificacao}}</h4>
+
+                {% if medico.bio %}
+                <h5>Sobre mim:</h5>
+                <div class="form-label-group">
+                    <textarea disabled rows="7" class="form-control"
+                              style="resize: none; width: 90%;">{{medico.bio}}</textarea>
+                    <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#edtBioModal">Editar
+                    </button>
+                </div>
+                {% else %}
+                <form method="post">
+                    {% csrf_token %}
+                    <h6>Bio:</h6>
+                    <div class="form-label-group">
+                                    <textarea type="TextInput" rows="7" maxlength="500" id="inputBio" name="bio"
+                                              class="form-control"
+                                              placeholder="Adicione uma Bio para as pessoas saberem mais sobre você"
+                                              required autofocus style="resize: none; width: 600px;"></textarea>
+                        <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                    </div>
+                </form>
+                {% endif %}
+
+                <div>
+                    <h5>Planos de saúde aceito:</h5>
+                    {% if medico.planos_aceitos %}
+                    <h6>{{medico.planos_aceitos}}</h6>
+                    <a href="{% url 'add_planos' medico.id %}">editar</a>
+                    {% else %}
+                    <h6 style="margin-left:10px;"> Não há nenhum plano de saúde atribuído ao seu perfil. <br>Adicione
+                        planos de saúde que você aceita clicando <a href="{% url 'add_planos' medico.id %}">aqui</a>.
+                    </h6>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+
+<!-- Modal de Edição da Bio -->
+<div class="modal fade" id="edtBioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Editar Bio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post">
+                <div class="modal-body">
+
+                    {% csrf_token %}
+                    <h6>Bio:</h6>
+                    <div class="form-label-group">
+                                    <textarea rows="9" class="form-control" name="bio" maxlength="500"
+                                              style="resize: none;" required autofocus>{{medico.bio}}</textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de Editar Foto de Perfil --> <!--
+<div class="modal fade" id="addFoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+     aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel2">Alterar Foto de Perfil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="modal-body">
+                {{formMedico.foto}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>  -->
 {% endblock content %}

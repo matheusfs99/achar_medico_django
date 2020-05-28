@@ -38,9 +38,45 @@ def cadastro_medico(request):
 def area_medico(request, id):
     context = {}
     medico = Medico.objects.get(id=id)
+    formUser = UsersForms(request.POST or None)
+    formMedico = MedicoForms(request.POST or None, request.FILES)
+    formBio = BioForm(request.POST or None, instance=medico)
     context['medico'] = medico
+    context['formMedico'] = formMedico
+    context['formUser'] = formUser
     if medico.foto != '':
         foto = Medico.objects.filter(foto__exact=medico.foto)
         context['foto'] = foto
+    if request.method == 'POST':
+        formBio.save()
+        return redirect('/pagina_medico/{}'.format(id))
     return render(request, 'area_medico.html', context)
 
+@login_required
+def edt_perfil(request, id):
+    context = {}
+    user = User.objects.get(id=id)
+    medico = Medico.objects.get(id=id)
+    formUser = UsersForms(request.POST or None, instance=user)
+    formMedico = MedicoForms(request.POST or None, instance=medico)
+    context['formMedico'] = formMedico
+    context['formUser'] = formUser
+    if all((formMedico.is_valid(), formUser.is_valid())):
+        user = formUser.save()
+        medico = formMedico.save(commit=False)
+        medico.user = user
+        medico.save()
+        return redirect('/pagina_medico/{}'.format(id))
+    return render(request, 'editar_medico.html', context)
+
+@login_required
+def add_planos(request, id):
+    context = {}
+    medico = Medico.objects.get(id=id)
+    formPlano = PlanosForm(request.POST or None, instance=medico)
+    context['formPlano'] = formPlano
+    if request.method == 'POST':
+        if formPlano.is_valid():
+            formPlano.save()
+            return redirect('/pagina_medico/{}'.format(id))
+    return render(request, 'add_plano_saude.html', context)

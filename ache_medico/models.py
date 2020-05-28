@@ -27,7 +27,46 @@ class Especialidade(models.Model):
     ]
 
 class Plano_Saude(models.Model):
-    plano = models.CharField(max_length=50)
+    PLANO = [
+        ('Bradesco Saúde', 'Bradesco Saúde'),
+        ('Amil', 'Amil'),
+        ('NotreDame Intermédica (GNDI)', 'NotreDame Intermédica (GNDI)'),
+        ('Porto Seguro', 'Porto Seguro'),
+        ('SulAmérica Saúde', 'SulAmérica Saúde'),
+        ('Care Plus', 'Care Plus'),
+        ('Prevent Senior', 'Prevent Senior'),
+        ('Allianz Saúde', 'Allianz Saúde'),
+        ('Hapvida', 'Hapvida'),
+        ('Sompo Saúde', 'Sompo Saúde'),
+        ('Omint', 'Omint'),
+        ('AMEPE CAMPE', 'AMEPE CAMPE'),
+        ('BANCO CENTRAL (Bancen)', 'BANCO CENTRAL (Bancen)'),
+        ('CASSI (Banco do Brasil)', 'CASSI (Banco do Brasil)'),
+        ('CONAB', 'CONAB'),
+        ('EMBRATEL', 'EMBRATEL'),
+        ('FACHESF', 'FACHESF'),
+        ('FUNCEF (Saúde Caixa)', 'FUNCEF (Saúde Caixa)'),
+        ('GAMA SAÚDE', 'GAMA SAÚDE'),
+        ('MEDIAL SAÚDE', 'MEDIAL SAÚDE'),
+        ('PLANASSIST MINIST.PUB. TRABALHO', 'PLANASSIST MINIST.PUB. TRABALHO'),
+        ('PLANASSIST MINIST.PUB. MILITAR', 'PLANASSIST MINIST.PUB. MILITAR'),
+        ('PETROBRAS DISTRIBUIDORA', 'PETROBRAS DISTRIBUIDORA'),
+        ('PROASA', 'PROASA'),
+        ('UNAFISCO SAÚDE', 'UNAFISCO SAÚDE'),
+        ('UNIMED', 'UNIMED'),
+        ('AERONÁUTICA', 'AERONÁUTICA'),
+        ('CAMED SAÚDE', 'CAMED SAÚDE'),
+        ('COMPESASAUDE', 'COMPESASAUDE'),
+        ('POSTAL SAÚDE (Correios)', 'POSTAL SAÚDE (Correios)'),
+        ('ESTALEIRO ATLÂNTICO SUL (EAS)', 'ESTALEIRO ATLÂNTICO SUL (EAS)'),
+        ('FIO SAÚDE', 'FIO SAÚDE'),
+        ('FUSEX', 'FUSEX'),
+        ('GEAP', 'GEAP'),
+        ('MEDISERVICE', 'MEDISERVICE'),
+        ('PLANASSIST MINIST. PUB. FEDERAL', 'PLANASSIST MINIST. PUB. FEDERAL'),
+        ('OMIINT/SKILL', 'OMIINT/SKILL'),
+        ('PETROB. PETROLEO', 'PETROB. PETROLEO'),
+    ]
 
 class Sexo(models.Model):
     SEXO = [
@@ -42,7 +81,7 @@ class Medico(models.Model):
     sexo = models.CharField(max_length=10, choices=Sexo.SEXO)
     data_nascimento = models.DateField()
     telefone = models.BigIntegerField()
-    #planos_aceitos = models.ForeignKey(Plano_Saude, on_delete=models.CASCADE)
+    planos_aceitos = models.CharField(max_length=300, choices=Plano_Saude.PLANO, null=True, blank=True)
     classificacao = models.FloatField(default=0)
-    bio = models.CharField(max_length=300, null=True, blank=True)
+    bio = models.TextField(max_length=500, null=True, blank=True)
     foto = models.ImageField(upload_to='medicos_imgs/', blank=True, null=True)
