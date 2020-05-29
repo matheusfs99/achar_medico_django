@@ -87,3 +87,13 @@ def add_planos(request, id):
             formPlano.save()
             return redirect('/pagina_medico/{}'.format(id))
     return render(request, 'add_plano_saude.html', context)
+
+
+def perfil_medico_view(request, id):
+    context = {}
+    medico = Medico.objects.get(id=id)
+    context['medico'] = medico
+    if medico.foto != '':
+        foto = Medico.objects.filter(foto__exact=medico.foto)
+        context['foto'] = foto
+    return render(request, 'perfil_medico_view.html', context)

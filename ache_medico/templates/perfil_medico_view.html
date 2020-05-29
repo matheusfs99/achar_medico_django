@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Área do Médico{% endblock title %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-8 mx-auto">
+        <div class="card card-signin my-5">
+            <div class="card-body">
+                <div class="row">
+                    <a href="{% url 'home' %}">
+                        <button type="button" class="btn btn-outline-danger btn-sm">Voltar</button>
+                    </a>
+                </div>
+                {% if foto %}
+                <img src="{{ medico.foto.url }}" alt="{{medico.user.first_name}}_{{medico.user.last_name}}"
+                     class="rounded mx-auto d-block" style="width:200px; height:200px;">
+                <div align="center">
+                </div>
+                {% else %}
+                <img src="..\..\media\medicos_imgs\sem-imagem-avatar.png" class="rounded mx-auto d-block"
+                     style="width:200px; height:200px;">
+                {% endif %}
+                <h1 style="text-align: center;">{{medico.user.first_name}} {{medico.user.last_name}}</h1>
+                <h3 style="text-align: center;">{{medico.especialidade}}</h3>
+
+                <!--<h5 align="center">Classificação: {{medico.classificacao}}</h5>-->
+
+                <h5>Sobre o Médico:</h5>
+                <div style="border: 1px solid gray;border-radius: 8px; padding:10px;margin-bottom:5px;">
+                    {{medico.bio}}
+                </div>
+
+                <h5>Planos de saúde aceito:</h5>
+                <div style="border: 1px solid gray;border-radius: 8px; padding:10px;margin-bottom:5px;">
+                    {% if medico.planos_aceitos %}
+                    <h6>{{medico.planos_aceitos}}</h6>
+                    {% else %}
+                    <p style="margin-left:10px;"> Não há nenhum plano de saúde atribuído ao perfil deste médico.</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h5>Locais de Atendimento:</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

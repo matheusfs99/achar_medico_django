@@ -8,5 +8,6 @@ urlpatterns = [
     path('cadastro_medico', cadastro_medico, name='cadastro_medico'),
     path('pagina_medico/<int:id>', area_medico, name='area_medico'),
     path('editar_perfil/<int:id>', edt_perfil, name='edt_perfil'),
-    path('add_planos_saude/<int:id>', add_planos, name='add_planos')
+    path('add_planos_saude/<int:id>', add_planos, name='add_planos'),
+    path('perfil_medico/<int:id>', perfil_medico_view, name='perfil_medico_view')
 ]

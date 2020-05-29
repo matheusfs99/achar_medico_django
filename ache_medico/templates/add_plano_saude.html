@@ -11,7 +11,8 @@
                 <form method="post">
                     {% csrf_token %}
                     {{formPlano}}
-                    <button type="submit">Salvar</button>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a href="{% url 'area_medico' user.id %}" style="text-decoration:none;" class="btn btn-danger">Cancelar</a>
                 </form>
             </div>
         </div>
