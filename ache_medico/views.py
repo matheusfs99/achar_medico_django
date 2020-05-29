@@ -7,7 +7,14 @@ from django.core.mail import send_mail
 
 # Create your views here.
 def home(request):
-    return render(request, 'index.html')
+    context = {}
+    medicos = Medico.objects.all()
+    busca_esp = request.GET.get('search-esp')
+    if busca_esp:
+        medicos = Medico.objects.filter(especialidade__icontains = busca_esp).order_by('especialidade')
+    context['medicos'] = medicos
+    print(medicos)
+    return render(request, 'index.html', context)
 
 def do_login_medico(request):
     if request.method == 'POST':

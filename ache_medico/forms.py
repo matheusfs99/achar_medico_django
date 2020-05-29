@@ -32,7 +32,8 @@ class MedicoForms(forms.ModelForm):
             'sexo': forms.Select(choices=Sexo.SEXO, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
             'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'maxlength': 9}),
             'telefone': forms.NumberInput(attrs={'class': 'form-control', 'maxlength': 11, 'placeholder': 'Telefone'}),
-            'especialidade': forms.Select(choices=Especialidade.ESPECIALIDADE, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
+            'especialidade': forms.Select(choices=Especialidade.ESPECIALIDADE,
+                                          attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
         }
 
 class BioForm(forms.ModelForm):
@@ -46,4 +47,13 @@ class PlanosForm(forms.ModelForm):
         fields = ['planos_aceitos']
         widgets = {
             'planos_aceitos': forms.CheckboxSelectMultiple(choices=Plano_Saude.PLANO)
+        }
+
+class BuscaEspecialidadeForm(forms.ModelForm):
+    class Meta:
+        model = Medico
+        fields = ['especialidade']
+        widgets = {
+            'especialidade': forms.Select(choices=Especialidade.ESPECIALIDADE,
+                                          attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
         }
