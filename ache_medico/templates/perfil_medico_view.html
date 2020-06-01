@@ -35,7 +35,7 @@
                 <h5>Planos de saúde aceito:</h5>
                 <div style="border: 1px solid gray;border-radius: 8px; padding:10px;margin-bottom:5px;">
                     {% if medico.planos_aceitos %}
-                    <h6>{{medico.planos_aceitos}}</h6>
+                    <p>{{medico.planos_aceitos}}</p>
                     {% else %}
                     <p style="margin-left:10px;"> Não há nenhum plano de saúde atribuído ao perfil deste médico.</p>
                     {% endif %}
@@ -43,6 +43,9 @@
 
                 <div>
                     <h5>Locais de Atendimento:</h5>
+                    <div style="border: 1px solid gray;border-radius: 8px; padding:10px;margin-bottom:5px;">
+                        <p style="margin-left:10px;">{{medico.local_de_atendimento}}</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -27,13 +27,13 @@ class UsersForms(forms.ModelForm):
 class MedicoForms(forms.ModelForm):
     class Meta:
         model = Medico
-        fields = ['sexo', 'data_nascimento', 'telefone', 'especialidade', 'foto']
+        fields = ['sexo', 'data_nascimento', 'telefone', 'especialidade', 'foto', 'local_de_atendimento']
         widgets = {
             'sexo': forms.Select(choices=Sexo.SEXO, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
             'data_nascimento': forms.DateInput(attrs={'class': 'form-control', 'maxlength': 9}),
-            'telefone': forms.NumberInput(attrs={'class': 'form-control', 'maxlength': 11, 'placeholder': 'Telefone'}),
-            'especialidade': forms.Select(choices=Especialidade.ESPECIALIDADE,
-                                          attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
+            'telefone': forms.NumberInput(attrs={'class': 'form-control', 'maxlength': 11}),
+            'especialidade': forms.Select(choices=Especialidade.ESPECIALIDADE, attrs={'class': 'form-control', 'style': 'border-radius: 2rem;height: 50px'}),
+            'local_de_atendimento': forms.TextInput(attrs={'class': 'form-control', 'style': 'border-radius: 2rem;'})
         }
 
 class BioForm(forms.ModelForm):
@@ -45,9 +45,6 @@ class PlanosForm(forms.ModelForm):
     class Meta:
         model = Medico
         fields = ['planos_aceitos']
-        widgets = {
-            'planos_aceitos': forms.CheckboxSelectMultiple(choices=Plano_Saude.PLANO)
-        }
 
 class BuscaEspecialidadeForm(forms.ModelForm):
     class Meta:

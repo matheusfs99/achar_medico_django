@@ -55,7 +55,8 @@ def area_medico(request, id):
         foto = Medico.objects.filter(foto__exact=medico.foto)
         context['foto'] = foto
     if request.method == 'POST':
-        formBio.save()
+        if formBio.is_valid():
+            formBio.save()
         return redirect('/pagina_medico/{}'.format(id))
     return render(request, 'area_medico.html', context)
 
@@ -68,12 +69,13 @@ def edt_perfil(request, id):
     formMedico = MedicoForms(request.POST or None, instance=medico)
     context['formMedico'] = formMedico
     context['formUser'] = formUser
-    if all((formMedico.is_valid(), formUser.is_valid())):
-        user = formUser.save()
-        medico = formMedico.save(commit=False)
-        medico.user = user
-        medico.save()
-        return redirect('/pagina_medico/{}'.format(id))
+    if request.method == 'POST':
+        if all((formUser.is_valid(), formMedico.is_valid())):
+            user = formUser.save()
+            medico = formMedico.save(commit=False)
+            medico.user = user
+            medico.save()
+            return redirect('logout')
     return render(request, 'editar_medico.html', context)
 
 @login_required

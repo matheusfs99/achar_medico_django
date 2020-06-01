@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from multiselectfield import MultiSelectField
 
 # Create your models here.
 class Especialidade(models.Model):
@@ -81,7 +82,8 @@ class Medico(models.Model):
     sexo = models.CharField(max_length=10, choices=Sexo.SEXO)
     data_nascimento = models.DateField()
     telefone = models.BigIntegerField()
-    planos_aceitos = models.CharField(max_length=300, choices=Plano_Saude.PLANO, null=True, blank=True)
+    planos_aceitos = MultiSelectField(choices=Plano_Saude.PLANO, null=True, blank=True)
     classificacao = models.FloatField(default=0)
     bio = models.TextField(max_length=500, null=True, blank=True)
+    local_de_atendimento = models.TextField(max_length=300)
     foto = models.ImageField(upload_to='medicos_imgs/', blank=True, null=True)
