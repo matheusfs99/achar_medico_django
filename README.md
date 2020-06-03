@@ -9,6 +9,7 @@ O sistema ainda está em sua versão inicial com poucas funcionalidades e filtra
 O sistema foi desenvolvido na linguagem python utilizando o framework web django, além de html, css e bootstrap para o front-end da aplicação.
 
 link da aplicação no heroku: https://achar-medico-django.herokuapp.com/
+
 Obs sobre a aplicação:
   - O sistema não está responsivo(ainda), então para uma melhor visualização, acesse pelo computador com a tela do navegador cheia.
   - O sistema a princípio é um trabalho acadêmico, então ainda está bem simples.
