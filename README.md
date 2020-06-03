@@ -6,7 +6,7 @@ A ideia principal é facilitar a busca das pessoas por um médico a partir de fi
 
 O sistema ainda está em sua versão inicial com poucas funcionalidades e filtragem apenas por especialidade.
 
-O sistema foi desenvolvido na linguagem python utilizando o framework web django, além de html, css e bootstrap para o front-end da aplicação.
+O sistema foi desenvolvido na linguagem *Python* utilizando o framework web *Django*, além de html, css e bootstrap para o front-end da aplicação.
 
 link da aplicação no heroku: https://achar-medico-django.herokuapp.com/
 
