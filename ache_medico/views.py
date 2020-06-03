@@ -66,7 +66,7 @@ def edt_perfil(request, id):
     user = User.objects.get(id=id)
     medico = Medico.objects.get(id=id)
     formUser = UsersForms(request.POST or None, instance=user)
-    formMedico = MedicoForms(request.POST or None, instance=medico)
+    formMedico = MedicoForms(request.POST or None, request.FILES or None, instance=medico)
     context['formMedico'] = formMedico
     context['formUser'] = formUser
     if request.method == 'POST':
